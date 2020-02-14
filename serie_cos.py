@@ -6,7 +6,7 @@ def askData():
     return x, eps
 
 def calculate_error(valor_real, valor_aprox):
-    return round(abs(valor_real - valor_aprox) / valor_real * 100, 4)
+    return round(abs(valor_real - valor_aprox) / abs(valor_real) * 100, 4)
 
 def aproximate(x, eps):
     valor_real  = round(math.cos(x), 4)
@@ -28,8 +28,8 @@ def show_results(results):
         print("{0}: {1}".format(key, value))
 
 def main():
-    data = askData()
-    results = aproximate(data[0], data[1])
+    (x, eps) = askData()
+    results = aproximate(x, eps)
     show_results(results)
 
 if __name__ == '__main__':
