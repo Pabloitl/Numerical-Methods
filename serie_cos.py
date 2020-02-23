@@ -1,6 +1,6 @@
 import math
 
-def askData():
+def ask_data():
     x   = float(input('Valor x: '))
     eps = float(input('Error porcentual: '))
     return x, eps
@@ -27,7 +27,7 @@ def show_results(results):
         print("{0}: {1}".format(key, value))
 
 def main():
-    (x, eps) = askData()
+    (x, eps) = ask_data()
     results = aproximate(x, eps)
     show_results(results)
 
