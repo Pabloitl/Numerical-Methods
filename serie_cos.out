@@ -1,0 +1,20 @@
+Python 3.8.1 (default, Jan 22 2020, 06:38:00)
+[GCC 9.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> python.el: native completion setup loaded
+>>> main()
+Valor x: 1
+Error porcentual: .05
+valor_real: 0.5403
+valor_aprox: 0.5403
+>>> main()
+Valor x: 2
+Error porcentual: .05
+valor_real: -0.4161
+valor_aprox: -0.4159
+>>> main()
+Valor x: -2
+Error porcentual: .05
+valor_real: -0.4161
+valor_aprox: -0.4159
+>>> 
