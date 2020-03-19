@@ -2,13 +2,16 @@ from math import *
 import pandas as p
 
 def ask_data():
-    eps = .05
-    x = 1
-    return eps, x
+    eps = float(input('Error: '))
+    x   = float(input('Valor inicial: '))
+    n   = int(input('Numero maximo de iteraciones'))
+    g   = input('Funcion g(x): ')
+    gp  = input('Funcion g\'(x): ')
+    return eps, x, n, g, gp
 
 def calculate_error(valor_aprox, valor_anterior):
     if valor_anterior == 0:
-        return 99999999
+        return 1e10
     return round(abs(valor_anterior - valor_aprox) / abs(valor_aprox) * 100, 4)
 
 def convergencia(g, x):
@@ -16,34 +19,28 @@ def convergencia(g, x):
         return False
     return True
 
-def aproximate(eps, x):
+def aproximate(eps, x, n, g, gp):
     frame = p.DataFrame()
-    (g, gp) = ('(1 - x ** 3 + 2 * x ** 2) / 3',
-               '(-3 * x ** 2 + 4 * x) / 3')
-    i = 0
     x_anterior = 0
 
-    while True:
+    for i in range(n):
         error = calculate_error(x, x_anterior)
-
-        temp_frame = p.DataFrame({"i": [i],
-                                 "x": [x],
-                                 "g(x)": [round(eval(g), 4)],
-                                 "Convergencia": [convergencia(gp, x)],
-                                 "Ea": [error]})
+        temp_frame = p.DataFrame({'i'           : [i],
+                                 'x'            : [x],
+                                 'g(x)'         : [round(eval(g), 4)],
+                                 'Convergencia' : [convergencia(gp, x)],
+                                 'Ea'           : [error]})
         frame = frame.append(temp_frame)
-        print(frame)
-        input()
-
-        if error < eps and convergencia(gp, x):
-            return frame
         x_anterior = x
         x = round(eval(g), 4)
-        i = i + 1
+
+        if error < eps:
+            return frame
+    return f"Procedimiento completado sin éxito después de {n} iteraciones"
 
 def main():
-    (eps, x) = ask_data()
-    print( aproximate(eps, x) )
+    (eps, x, n, g, gp) = ask_data()
+    print(aproximate(eps, x, n, g, gp))
 
 if __name__ == '__main__':
     main()
